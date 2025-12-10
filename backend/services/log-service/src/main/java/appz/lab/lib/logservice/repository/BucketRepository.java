@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface BucketRepository extends MongoRepository<LogBucket,String> {
     Optional<LogBucket> findByServiceName(String serviceName);
+    Optional<LogBucket> findByServiceNameOr(String serviceName);
 }
