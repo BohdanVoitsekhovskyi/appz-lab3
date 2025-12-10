@@ -5,18 +5,19 @@ import ch.qos.logback.classic.LoggerContext;
 import custom.logger.starter.appender.InMemoryLogAppender;
 import custom.logger.starter.listener.LogOverloadHandler;
 import custom.logger.starter.properties.LoggingProperties;
-import custom.logger.starter.properties.ServiceProperties;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 @AutoConfiguration
-@EnableConfigurationProperties({ServiceProperties.class, LoggingProperties.class})
+@EnableConfigurationProperties({LoggingProperties.class})
 @ConditionalOnProperty(prefix = "custom.logging", name = "enabled", havingValue = "true", matchIfMissing = true)
 @ConditionalOnClass(RabbitTemplate.class)
 public class LoggerStarterAutoConfiguration {
@@ -43,9 +44,10 @@ public class LoggerStarterAutoConfiguration {
     public LogOverloadHandler logOverloadHandler(
             RabbitTemplate rabbitTemplate,
             InMemoryLogAppender appender,
-            ServiceProperties props
+            @Value("${spring.application.name}") String serviceName
     ) {
-        return new LogOverloadHandler(rabbitTemplate, appender, props);
+
+        return new LogOverloadHandler(rabbitTemplate, appender,serviceName);
     }
 
 }
