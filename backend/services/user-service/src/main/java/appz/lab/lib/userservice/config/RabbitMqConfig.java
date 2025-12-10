@@ -2,6 +2,7 @@ package appz.lab.lib.userservice.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -13,6 +14,7 @@ public class RabbitMqConfig {
 
     public static final String PatientRegistrationQueue = "patient.registration.queue";
     public static final String DoctorRegistrationQueueName = "doctor.registration.queue";
+
     @Bean
     public Queue patientRegistrationQueueName() {
         return new Queue(PatientRegistrationQueue, true);
@@ -35,4 +37,12 @@ public class RabbitMqConfig {
         template.setObservationEnabled(true);
         return template;
     }
+
+    @Bean
+    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
+        RabbitAdmin admin = new RabbitAdmin(connectionFactory);
+        admin.setAutoStartup(true);
+        return admin;
+    }
+
 }

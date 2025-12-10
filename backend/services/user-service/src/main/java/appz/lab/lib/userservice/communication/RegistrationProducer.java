@@ -15,7 +15,7 @@ public class RegistrationProducer {
     private final RabbitTemplate rabbitTemplate;
 
     public void sendPatientRegistrationBody(PatientRegistrationBody patientRegistrationBody) {
-        rabbitTemplate.convertAndSend(RabbitMqConfig.DoctorRegistrationQueueName, patientRegistrationBody);
+        rabbitTemplate.convertAndSend(RabbitMqConfig.PatientRegistrationQueue, patientRegistrationBody);
     }
     public void sendDoctorRegistrationBody(DoctorRegistrationBody doctorRegistrationBody) {
         rabbitTemplate.convertAndSend(RabbitMqConfig.DoctorRegistrationQueueName, doctorRegistrationBody);

@@ -4,11 +4,14 @@ import appz.lab.common.lib.notification.AppointmentSuccessfullyCreatedEvent;
 import appz.lab.lib.patientservice.communication.NotificationProducer;
 import appz.lab.lib.patientservice.dto.AppointmentDto;
 import appz.lab.lib.patientservice.entities.Appointment;
+import appz.lab.lib.patientservice.entities.Patient;
 import appz.lab.lib.patientservice.repository.AppointmentRepository;
+import appz.lab.lib.patientservice.repository.PatientRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final NotificationProducer notificationProducer;
+    private final PatientRepository patientRepository;
 
     public void createAppointment(AppointmentDto dto){
         Appointment appointment = new Appointment();
@@ -29,8 +33,11 @@ public class AppointmentService {
 
         appointmentRepository.save(appointment);
 
+        Patient patient = patientRepository.findById(dto.getPatientId()).orElseThrow(EntityNotFoundException::new);
         notificationProducer.sendAppointmentCreationEvent(
-                new AppointmentSuccessfullyCreatedEvent("bohdan.voitsekhovskyi.pz.2022@lpnu.ua","Dr. Smith", LocalDateTime.of(appointment.getAppointmentDate(),appointment.getAppointmentTime()))
+                new AppointmentSuccessfullyCreatedEvent(patientRepository.findById(appointment.getPatientId())
+                        .orElseThrow(EntityNotFoundException::new).getEmail(),
+                        "",LocalDateTime.of(appointment.getAppointmentDate(),appointment.getAppointmentTime()))
         );
     }
     public List<Appointment> getAppointmentListById(Long id) {
@@ -38,5 +45,13 @@ public class AppointmentService {
     }
     public Appointment getAppointmentById(Long id) {
         return appointmentRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public List<Appointment> getAppointmentsByDoctorAndDate(Long doctorId, LocalDate date) {
+        return appointmentRepository.findByDoctorIdAndAppointmentDate(doctorId, date);
+    }
+
+    public List<Appointment> getAppointmentsByDoctorId(Long doctorId) {
+        return appointmentRepository.findByDoctorId(doctorId);
     }
 }

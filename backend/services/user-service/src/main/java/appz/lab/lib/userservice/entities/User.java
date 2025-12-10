@@ -20,13 +20,14 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String email;
 
     private String password;
 
+    @Enumerated(EnumType.ORDINAL)
     private UserRole role;
 
     @Column(nullable = false,name = "created_at", updatable = false)

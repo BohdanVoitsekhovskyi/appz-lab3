@@ -18,6 +18,7 @@ public class Doctor {
     private Long userId;
     private String firstName;
     private String lastName;
+    private String email;
     private String specialty;
     private Integer experience;
     private Map<DayOfWeek, List<LocalTime>> schedule;

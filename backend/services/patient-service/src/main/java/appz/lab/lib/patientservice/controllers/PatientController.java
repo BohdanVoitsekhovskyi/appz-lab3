@@ -4,15 +4,13 @@ import appz.lab.lib.patientservice.entities.Appointment;
 import appz.lab.lib.patientservice.services.AppointmentService;
 import appz.lab.lib.patientservice.services.PatientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/patients")
 public class PatientController {
 
@@ -20,7 +18,7 @@ public class PatientController {
     private final AppointmentService appointmentService;
 
     @GetMapping("/{patientId}/appointments")
-    public List<Appointment> getAppointmentById(@PathVariable Long id) {
-        return appointmentService.getAppointmentListById(id);
+    public List<Appointment> getAppointmentsByPatientId(@PathVariable Long patientId) {
+        return appointmentService.getAppointmentListById(patientId);
     }
 }

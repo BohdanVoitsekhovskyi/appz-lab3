@@ -4,4 +4,5 @@ import appz.lab.lib.userservice.entities.User;
 
 public interface AuthService {
     User authenticate(String email, String password);
+    void ensureHeadDoctorExists();
 }

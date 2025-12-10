@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
                 savedUser.getId(),
                 dto.getFirstName(),
                 dto.getLastName(),
+                dto.getEmail(),
                 dto.getSpecialty(),
                 dto.getExperience(),
                 dto.getSchedule()
@@ -58,13 +59,17 @@ public class UserServiceImpl implements UserService {
 
         User savedUser = userRepository.save(userDataToSave);
 
-        PatientRegistrationBody patientRegistrationBody = PatientRegistrationBody.builder()
-                .userId(savedUser.getId())
-                .firstName(dto.getFirstName())
-                .lastName(dto.getLastName())
-                .phoneNumber(dto.getPhone())
-                .dateOfBirth(dto.getDateOfBirth())
-                .address(dto.getAddress()).build();
+        PatientRegistrationBody patientRegistrationBody = new PatientRegistrationBody(
+                savedUser.getId(),
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getEmail(),
+                dto.getDateOfBirth(),
+                dto.getAddress(),
+                dto.getPhone()
+
+        );
+
 
         registrationProducer.sendPatientRegistrationBody(patientRegistrationBody);
 

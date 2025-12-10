@@ -1,6 +1,7 @@
 package appz.lab.lib.patientservice.communication;
 
 import appz.lab.common.lib.notification.AppointmentSuccessfullyCreatedEvent;
+import appz.lab.common.lib.notification.SuccessfulRegistrationEvent;
 import appz.lab.common.lib.pojos.PatientRegistrationBody;
 import appz.lab.lib.patientservice.config.RabbitMqConfig;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,10 @@ public class NotificationProducer {
     private final RabbitTemplate rabbitTemplate;
 
     public void sendAppointmentCreationEvent(AppointmentSuccessfullyCreatedEvent event) {
+        rabbitTemplate.convertAndSend(RabbitMqConfig.NotificationQueue, event);
+    }
+
+    public void sendSuccessfulRegistrationEvent(SuccessfulRegistrationEvent event) {
         rabbitTemplate.convertAndSend(RabbitMqConfig.NotificationQueue, event);
     }
 }
