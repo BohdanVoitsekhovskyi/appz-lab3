@@ -1,14 +1,12 @@
 package appz.lab.lib.notificationservice.communication;
 
 
+import appz.lab.common.lib.notification.BaseEvent;
 import appz.lab.lib.notificationservice.events.EventHandlerFactory;
-import appz.lab.lib.notificationservice.events.events.BaseEvent;
 import appz.lab.lib.notificationservice.events.handlers.EventHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 @Service

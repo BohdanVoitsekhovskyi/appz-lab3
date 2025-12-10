@@ -1,7 +1,7 @@
 package appz.lab.lib.notificationservice.events.handlers;
 
-import appz.lab.lib.notificationservice.events.events.BaseEvent;
-import appz.lab.lib.notificationservice.events.events.SuccessfulRegistrationEvent;
+import appz.lab.common.lib.notification.BaseEvent;
+import appz.lab.common.lib.notification.SuccessfulRegistrationEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;

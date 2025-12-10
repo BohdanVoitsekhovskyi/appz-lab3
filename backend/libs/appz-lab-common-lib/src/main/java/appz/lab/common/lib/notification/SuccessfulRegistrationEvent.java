@@ -1,4 +1,4 @@
-package appz.lab.lib.notificationservice.events.events;
+package appz.lab.common.lib.notification;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

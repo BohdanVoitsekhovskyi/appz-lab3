@@ -1,6 +1,7 @@
 package appz.lab.lib.notificationservice.events;
 
-import appz.lab.lib.notificationservice.events.events.BaseEvent;
+
+import appz.lab.common.lib.notification.BaseEvent;
 import appz.lab.lib.notificationservice.events.handlers.EventHandler;
 import org.springframework.stereotype.Component;
 
