@@ -16,4 +16,8 @@ public class LogBucket {
     @Id
     private String serviceName;
     private List<String> logs;
+
+    public void appendLogs(List<String> newLogs) {
+        this.logs.addAll(newLogs);
+    }
 }
