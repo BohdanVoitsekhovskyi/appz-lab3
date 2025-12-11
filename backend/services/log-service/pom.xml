@@ -72,6 +72,12 @@
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-exporter-otlp</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>appz.lab.lib</groupId>
+            <artifactId>custom-loger-starter</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

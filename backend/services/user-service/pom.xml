@@ -92,6 +92,11 @@
             <artifactId>appz-lab-common-lib</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>appz.lab.lib</groupId>
+            <artifactId>custom-loger-starter</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
