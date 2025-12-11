@@ -167,3 +167,4 @@ const AppointmentsList = ({ patientId }) => {
 
 export default AppointmentsList;
 
+

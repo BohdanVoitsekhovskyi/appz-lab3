@@ -29,3 +29,4 @@ The login page calls the `/authenticate` endpoint:
 - Parameters: `email` and `password` (query parameters)
 - Returns: User object with id, email, role, etc.
 
+

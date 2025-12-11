@@ -58,3 +58,4 @@ All controllers have CORS enabled with the following configuration:
 - Path variables must match the parameter names in the controller methods
 - All controllers are properly annotated with `@CrossOrigin` for CORS support
 
+
